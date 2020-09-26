@@ -1,0 +1,31 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: content/assets
+public_folder: ../assets
+
+collections:
+  - name: articles
+    label: Article
+    folder: content/articles
+    create: true
+    fields:
+      - { name: path, label: Path }
+      - { name: title, label: Title }
+      - { name: description, label: Description }
+      - { name: date, label: Date, widget: date }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: recipes
+    label: Recipe
+    folder: content/recipes
+    create: true
+    fields:
+      - { name: path, label: Path }
+      - { name: title, label: Title }
+      - { name: description, label: Description }
+      - { name: date, label: Date, widget: date }
+      - { name: ingredients, label: Ingredients, widget: list }
+      - { name: utensils, label: Utensils, widget: list }
+      - { name: body, label: Body, widget: markdown }
