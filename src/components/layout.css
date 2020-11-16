@@ -25,3 +25,13 @@ a.tag-link:hover {
 a.tag-link.active {
   @apply bg-yellow-700 text-white;
 }
+
+.icon-search .primary {
+  stroke: #ccc;
+  stroke-width: 2;
+  fill: transparent;
+}
+
+.icon-search .secondary {
+  fill: #ccc;
+}

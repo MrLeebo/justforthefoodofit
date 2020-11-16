@@ -23,7 +23,9 @@ export default function Tag({ data, pageContext }: Props) {
         <hr />
       </Prose>
 
-      <PostList posts={data.results} showType />
+      <div className="mt-3">
+        <PostList posts={data.results} showType />
+      </div>
     </Layout>
   )
 }

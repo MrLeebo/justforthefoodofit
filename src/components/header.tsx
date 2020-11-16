@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
+import Search from "./search"
 
 type NavBarItem = {
   label: string
@@ -13,6 +14,10 @@ export default function Header() {
         siteMetadata {
           title
         }
+      }
+
+      search: siteSearchIndex {
+        index
       }
 
       layout: markdownRemark(
@@ -66,6 +71,7 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+            <Search searchIndex={data.search.index} />
           </div>
           <div className="flex items-center">
             <Link

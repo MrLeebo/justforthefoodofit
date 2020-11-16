@@ -54,8 +54,8 @@ export default function Post({ node, showType }: Props) {
 
       <div>
         <TagList tags={node.frontmatter.tags} /> &middot;{" "}
-        {new Date(node.frontmatter.date).toLocaleDateString()} &middot;{" "}
-        {node.timeToRead} min read
+        {new Date(node.frontmatter.date).toLocaleDateString()}
+        {node.timeToRead > 0 && <>&middot; {node.timeToRead} min read</>}
       </div>
     </div>
   )

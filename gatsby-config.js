@@ -1,3 +1,5 @@
+const Inflector = require("inflected")
+
 module.exports = {
   siteMetadata: {
     title: `Just For The FOOD Of It`,
@@ -5,6 +7,27 @@ module.exports = {
     author: `Bonnie Vail`,
   },
   plugins: [
+    {
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      options: {
+        fields: [`title`, `tags`],
+        resolvers: {
+          MarkdownRemark: {
+            title: node => node.frontmatter.title,
+            tags: node => node.frontmatter.tags,
+            path: node => node.frontmatter.path,
+            timeToRead: node => node.timeToRead,
+            frontmatter: node => node.frontmatter,
+            contentType: node => {
+              const match = node.fileAbsolutePath.match(
+                /\/src\/content\/(\w+)\//
+              )
+              return match && Inflector.singularize(match[1])
+            },
+          },
+        },
+      },
+    },
     `gatsby-plugin-postcss`,
     `gatsby-plugin-react-helmet`,
     {
