@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Awesome Recipes`,
+    title: `Just For The FOOD Of It`,
     description: `Awesome cooking recipes by Bonnie.`,
     author: `Bonnie Vail`,
   },

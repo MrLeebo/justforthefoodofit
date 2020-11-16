@@ -1,20 +1,65 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Prose from "../components/prose"
+import PostList from "../components/post-list"
 
-export default function IndexPage() {
+export default function IndexPage({ data }: { data: any }) {
+  const {
+    index: { frontmatter, html },
+    recent,
+  } = data
+
   return (
     <Layout>
-      <SEO title="Home" />
-      <article className="prose lg:prose-xl">
-        <h1>Hi people</h1>
-        <p>Welcome to your new Gatsby site.</p>
-        <p>Now go build something great.</p>
-        <Link to="/how-to-boil-an-egg">How to boil an egg</Link> <br />
-        <Link to="/boiled-egg/">Boiled Egg recipe</Link>
-      </article>
+      <SEO
+        title={frontmatter.title}
+        description={frontmatter.description}
+        image={frontmatter.photo}
+      />
+
+      <div
+        className="bg-cover"
+        style={{ backgroundImage: frontmatter.photo }}
+      />
+
+      <Prose>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+      </Prose>
+
+      <h2>Recent posts</h2>
+      <PostList posts={recent} showType />
     </Layout>
   )
 }
+
+export const query = graphql`
+  query indexQuery {
+    index: markdownRemark(
+      fileAbsolutePath: { regex: "/src/content/index.md/" }
+    ) {
+      frontmatter {
+        title
+        description
+        photo
+      }
+      html
+    }
+
+    recent: allMarkdownRemark(
+      limit: 9
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: {
+        fileAbsolutePath: { regex: "/src/content/(recipes|articles)/" }
+      }
+    ) {
+      edges {
+        node {
+          ...Post
+        }
+      }
+    }
+  }
+`

@@ -1,31 +1,83 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
 
-media_folder: content/assets
-public_folder: ../assets
+media_folder: "static/assets"
+public_folder: "../assets"
 
 collections:
+  - name: pages
+    label: Pages
+    files:
+      - name: layout
+        label: Layout
+        file: src/content/layout.md
+        fields:
+          - { name: logo, label: Logo, widget: image }
+          - { name: summary, label: Summary }
+          - name: navbar
+            label: NavBar
+            widget: list
+            fields:
+              - { name: label, label: Label }
+              - { name: path, label: Path }
+      - name: index
+        label: Home
+        file: src/content/index.md
+        fields:
+          - { name: title, label: Title }
+          - { name: description, label: Description }
+          - { name: body, label: Body, widget: markdown }
+
+      - name: about
+        label: About
+        file: src/content/about.md
+        fields:
+          - { name: title, label: Title }
+          - { name: description, label: Description }
+          - { name: photo, label: Photo, widget: image }
+          - { name: caption, label: Caption }
+          - { name: body, label: Biography, widget: markdown }
+
   - name: articles
     label: Article
-    folder: content/articles
+    folder: src/content/articles
     create: true
     fields:
       - { name: path, label: Path }
       - { name: title, label: Title }
       - { name: description, label: Description }
       - { name: date, label: Date, widget: date }
+      - { name: photo, label: Photo, widget: image }
+      - { name: tags, label: Tags, widget: list }
       - { name: body, label: Body, widget: markdown }
 
   - name: recipes
     label: Recipe
-    folder: content/recipes
+    folder: src/content/recipes
     create: true
     fields:
       - { name: path, label: Path }
       - { name: title, label: Title }
       - { name: description, label: Description }
       - { name: date, label: Date, widget: date }
+      - { name: photo, label: Photo, widget: image }
+      - { name: caption, label: Caption }
+      - { name: tags, label: Tags, widget: list }
       - { name: ingredients, label: Ingredients, widget: list }
       - { name: utensils, label: Utensils, widget: list }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: products
+    label: Product
+    folder: src/content/products
+    create: true
+    fields:
+      - { name: path, label: Path }
+      - { name: title, label: Name }
+      - { name: description, label: Description }
+      - { name: date, label: Date, widget: date }
+      - { name: photo, label: Photo, widget: image }
+      - { name: caption, label: Caption }
+      - { name: tags, label: Tags, widget: list }
       - { name: body, label: Body, widget: markdown }
